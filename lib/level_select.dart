@@ -43,7 +43,7 @@ class LevelSelect extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.red,
                   textStyle: TextStyle(
-                    fontSize: 30, //フォントサイズ
+                    fontSize: 24, //フォントサイズ
                   ),
                 ),
               ),
