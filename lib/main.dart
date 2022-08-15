@@ -67,6 +67,14 @@ class _AppState extends State<App> {
 
             //テキストボタン
             TextButton(
+              child: const Text(
+                'スタート！',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
               style: TextButton.styleFrom(
                 fixedSize: Size(200, 50),
                 backgroundColor: Colors.blue,
@@ -79,14 +87,6 @@ class _AppState extends State<App> {
                   ),
                 );
               },
-              child: const Text(
-                'スタート！',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
             ),
           ],
         ),
