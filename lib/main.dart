@@ -40,9 +40,37 @@ class _AppState extends State<App> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // const SizedBox(height: 50),
+            const SizedBox(height: 50),
             //イベントボタン
-            ElevatedButton(
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => LevelSelect(),
+            //       ),
+            //     );
+            //   },
+            //   child: Text('スタート！'),
+            //   style: ElevatedButton.styleFrom(
+            //     primary: Colors.blue,
+            //     textStyle: TextStyle(
+            //       fontSize: 40,
+            //     ),
+            //     //枠線!
+            //     side: BorderSide(
+            //       color: Colors.black,
+            //       width: 3,
+            //     ),
+            //   ),
+            // ),
+
+            //テキストボタン
+            TextButton(
+              style: TextButton.styleFrom(
+                fixedSize: Size(200, 50),
+                backgroundColor: Colors.blue,
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -51,33 +79,11 @@ class _AppState extends State<App> {
                   ),
                 );
               },
-              child: Text('スタート！'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
-                textStyle: TextStyle(
-                  fontSize: 40,
-                ),
-                //枠線!
-                side: BorderSide(
-                  color: Colors.black,
-                  width: 3,
-                ),
-              ),
-            ),
-
-            //テキストボタン
-            TextButton(
-              style: TextButton.styleFrom(
-                fixedSize: Size(200, 50),
-                backgroundColor: Colors.blue,
-              ),
-              onPressed: null,
-              // onPressed: () {},
               child: const Text(
                 'スタート！',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: FontWeight.w900,
                 ),
               ),

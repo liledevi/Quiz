@@ -4,7 +4,7 @@ import 'quiz_page.dart';
 import 'level_select.dart';
 import 'select_quiz.dart';
 
-class LevelSelect extends StatelessWidget {
+class SelectQuiz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,13 +20,13 @@ class LevelSelect extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SelectQuiz(),
+                      builder: (context) => QuizPage(),
                     ),
                   );
                 },
-                child: Text('レベル１'),
+                child: Text('1-1'),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
+                  primary: Colors.green,
                   textStyle: TextStyle(
                     fontSize: 30, //フォントサイズ
                   ),
@@ -37,15 +37,15 @@ class LevelSelect extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SelectQuiz(),
+                      builder: (context) => QuizPage(),
                     ),
                   );
                 },
-                child: Text('レベル2'),
+                child: Text('1-2'),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
+                  primary: Colors.green,
                   textStyle: TextStyle(
-                    fontSize: 30, //フォントサイズ
+                    fontSize: 24, //フォントサイズ
                   ),
                 ),
               ),
