@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:quiz/main.dart';
 import 'quiz_page.dart';
 import 'level_select.dart';
-import 'select_quiz.dart';
 
 class SelectQuiz extends StatelessWidget {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/level_select.dart';
+import 'package:quiz/view/level_select.dart';
 import 'footer.dart';
 
 void main() {
