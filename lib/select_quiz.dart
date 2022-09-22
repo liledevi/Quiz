@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/main.dart';
-import 'quiz_page.dart';
-import 'select_quiz.dart';
+import 'view/quiz_page.dart';
+import 'level_select.dart';
 
-class LevelSelect extends StatelessWidget {
+class SelectQuiz extends StatelessWidget {
+  SelectQuiz({Key? key}) : super(key: key);
+  late List<Map> quizList;
+
+  //CSVから問題リストを作成
+  Future<void> goToQuizApp(BuildContext context) async {
+    quizList = shuffle(await getCsvData('assets/quiz_1.csv'));
+    for (Map row in quizList) {
+      debugPrint(row["question"]);
+    }
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => QuizPage(quizList)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,9 +30,6 @@ class LevelSelect extends StatelessWidget {
             width: double.infinity,
             color: Colors.transparent,
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
               child: Text('戻る'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.yellow,
@@ -29,6 +39,9 @@ class LevelSelect extends StatelessWidget {
                 ),
                 onPrimary: Colors.black,
               ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
           ),
           Container(
@@ -39,16 +52,18 @@ class LevelSelect extends StatelessWidget {
                 //ボタン
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SelectQuiz(),
-                      ),
-                    );
+                    //画面遷移
+                    goToQuizApp(context);
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => QuizPage(),
+                    //   ),
+                    // );
                   },
-                  child: Text('レベル１'),
+                  child: Text('1-1'),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
+                    primary: Colors.green,
                     textStyle: TextStyle(
                       fontSize: 30, //フォントサイズ
                     ),
@@ -59,13 +74,13 @@ class LevelSelect extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SelectQuiz(),
+                        builder: (context) => QuizPage(),
                       ),
                     );
                   },
-                  child: Text('レベル2'),
+                  child: Text('1-2'),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
+                    primary: Colors.green,
                     textStyle: TextStyle(
                       fontSize: 30, //フォントサイズ
                     ),

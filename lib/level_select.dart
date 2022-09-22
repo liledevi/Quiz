@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/main.dart';
-import 'quiz_page.dart';
-import 'level_select.dart';
+import 'view/quiz_page.dart';
+import 'select_quiz.dart';
 
-class SelectQuiz extends StatelessWidget {
+class LevelSelect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +17,9 @@ class SelectQuiz extends StatelessWidget {
             width: double.infinity,
             color: Colors.transparent,
             child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: Text('戻る'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.yellow,
@@ -26,9 +29,6 @@ class SelectQuiz extends StatelessWidget {
                 ),
                 onPrimary: Colors.black,
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
             ),
           ),
           Container(
@@ -42,13 +42,13 @@ class SelectQuiz extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => QuizPage(),
+                        builder: (context) => SelectQuiz(),
                       ),
                     );
                   },
-                  child: Text('1-1'),
+                  child: Text('レベル１'),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
+                    primary: Colors.red,
                     textStyle: TextStyle(
                       fontSize: 30, //フォントサイズ
                     ),
@@ -59,13 +59,13 @@ class SelectQuiz extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => QuizPage(),
+                        builder: (context) => SelectQuiz(),
                       ),
                     );
                   },
-                  child: Text('1-2'),
+                  child: Text('レベル2'),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
+                    primary: Colors.red,
                     textStyle: TextStyle(
                       fontSize: 30, //フォントサイズ
                     ),

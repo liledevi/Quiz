@@ -1,124 +1,86 @@
 import 'package:flutter/material.dart';
-import 'level_select.dart';
+import 'package:quiz/view/result_page.dart';
 
 class QuizPage extends StatefulWidget {
-  // QuizPage(this.quizList, {Key? key}) : super(key: key);
-  // List<Map> quizList;
+  QuizPage(this.quizList, {Key? key}) : super(key: key);
+  List<Map> quizList;
 
   @override
   State<QuizPage> createState() => QuizPageState();
 }
 
 class QuizPageState extends State<QuizPage> {
-  // late List<Map> quizList;
+  late List<Map> quizList;
   int index = 0;
   int result = 0;
   bool isSelectNow = true;
 
   @override
   void initState() {
-    // quizList = widget.quizList;
-    // super.initState();
+    quizList = widget.quizList;
+    super.initState();
+  }
+
+  Future<void> updateQuiz(BuildContext context, int selectAnswer) async {
+    setState(() {
+      isSelectNow = false;
+    });
+    if (quizList[index]["answer"] == selectAnswer) {
+      result++;
+    }
+
+    await Future.delayed(const Duration(seconds: 1));
+    isSelectNow = true;
+    setState(() {});
+    index++;
+    if (index == quizList.length) {
+      await goToResult(context);
+    }
+    setState(() {});
+  }
+
+  Future<void> goToResult(BuildContext context) async {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Result(result, quizList.length)));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            margin: const EdgeInsets.only(top: 40),
-            padding: const EdgeInsets.only(left: 20),
-            height: 80,
-            width: double.infinity,
-            color: Colors.transparent,
-            child: ElevatedButton(
-              child: Text('リタイア'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.yellow,
-                textStyle: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold, //フォントサイズ
-                ),
-                onPrimary: Colors.black,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              '問題',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 4.0,
-              ),
-            ),
-          ),
-          //問題文
-          Container(
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              'aaaaaaaaaaaaaaaaaaaa',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                // fontWeight: FontWeight.bold,
-                letterSpacing: 4.0,
-              ),
-            ),
-          ),
-          //選択肢
-          Container(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //ボタン
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => QuizPage(),
-                      ),
-                    );
-                  },
-                  child: Text('1.選択肢1'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.blue,
-                    textStyle: TextStyle(
-                      fontSize: 30, //フォントサイズ
-                    ),
+      body: index < quizList.length
+          ? CustomScrollView(
+              slivers: <Widget>[
+                SliverList(
+                    delegate: SliverChildListDelegate([
+                  Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 3)),
+                  Text(
+                    quizList[index]['question'],
+                    textAlign: TextAlign.center,
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => QuizPage(),
-                      ),
-                    );
+                ])),
+                SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                  (context, key) {
+                    return TextButton(
+                        onPressed: () async {
+                          if (!isSelectNow) return;
+                          await updateQuiz(context, key);
+                        },
+                        child: isSelectNow
+                            ? Text(quizList[index]["select$key"])
+                            : quizList[index]["answer"] == key
+                                ? Text(quizList[index]["select$key"] + "○")
+                                : Text(quizList[index]["select$key"] + "×"));
                   },
-                  child: Text('2.選択肢2'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.blue,
-                    textStyle: TextStyle(
-                      fontSize: 30, //フォントサイズ
-                    ),
-                  ),
-                ),
+                  childCount: 4,
+                )),
               ],
-            ),
-          ),
-        ],
-      ),
+            )
+          : Container(),
     );
   }
 }
